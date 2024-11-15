@@ -1,0 +1,11 @@
+{
+  "name": "ocean",
+  "version": "1.0.0",
+  "author": "Jacob Samuel G.",
+  "description": "Personal libreries for javascript",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ]
+}

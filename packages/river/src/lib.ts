@@ -1,0 +1,78 @@
+import { IncomingMessage, ServerResponse } from 'node:http';
+import {
+  RiverHandlerFn,
+  RiverEvent,
+  RiverMiddlewareFn,
+  RiverHandlerDefinition,
+  RiverMiddlewareDefinition,
+  RiverErrorHandlerDefinition,
+  RiverErrorHandlerFn,
+  RiverEndpointFn,
+  RiverEndpointOptions
+} from './types.js';
+import { defaultErrorHandler, getEndpointConfig, nextFn } from './utils.js';
+
+export function createMiddleware(middleware: RiverMiddlewareFn): RiverMiddlewareDefinition {
+  return {
+    listen: (event: RiverEvent) => middleware(event, nextFn)
+  };
+}
+
+export function createHandler(handler: RiverHandlerFn): RiverHandlerDefinition {
+  return {
+    listen: (event: RiverEvent) => handler(event)
+  };
+}
+
+export function createErrorHandler(errorHandler: RiverErrorHandlerFn): RiverErrorHandlerDefinition {
+  return {
+    listen: (event: RiverEvent, error: Error) => errorHandler(event, error)
+  };
+}
+
+async function runEndpointMiddlewares(event: RiverEvent, middlewares: RiverMiddlewareDefinition[]): Promise<boolean> {
+  const middlewareLength = middlewares.length;
+  let next: boolean = true;
+
+  for (let i = 0; i < middlewareLength; i++) {
+    const middleware = middlewares[i];
+    next = await middleware.listen(event) || false;
+
+    if (!next) break;
+  }
+
+  return next;
+}
+
+export function createEndpoint(options: RiverEndpointOptions): RiverEndpointFn {
+  const middlewares = options.middlewares || [];
+  const errorHandler = options.errorHandler || createErrorHandler(defaultErrorHandler);
+  const config = getEndpointConfig(options.config);
+
+  return async (
+    req: IncomingMessage,
+    res: ServerResponse,
+    params: Map<string, string>,
+    store = new Map()
+  ) => {
+    if ((req.method !== options.method) && (options.method !== 'ALL')) {
+      res.statusCode = 404;
+      res.end();
+      return;
+    }
+
+    const event: RiverEvent = { req, res, params, store };
+
+    try {
+      const next = await runEndpointMiddlewares(event, middlewares);
+      if (next) await options.handler.listen(event);
+    } catch (err: unknown) {
+      const error = err instanceof Error ?
+        err :
+        new Error('Unknown error', { cause: err });
+
+      config.errorLogger(error);
+      errorHandler.listen(event, error);
+    }
+  };
+}

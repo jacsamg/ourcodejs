@@ -1,0 +1,19 @@
+# directories
+.angular
+.nx
+.vscode
+build
+cache
+dist
+node_modules
+secrets
+www
+
+# files
+dev.env
+prod.env
+npm-debug.log
+
+# system files
+.DS_Store
+Thumbs.db
