@@ -56,7 +56,7 @@ export function createEndpoint(options: RiverEndpointOptions): RiverEndpointFn {
     store = new Map()
   ) => {
     if ((req.method !== options.method) && (options.method !== 'ALL')) {
-      res.statusCode = 404;
+      res.statusCode = 400;
       res.end();
       return;
     }
