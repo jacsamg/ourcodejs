@@ -18,7 +18,7 @@ export function naturalSort(a: string, b: string): number {
   return a.localeCompare(b, 'es', { numeric: true });
 }
 
-export function getRandomChartset(size: number) {
+export function getRandomCharset(size: number) {
   const charset = "abcdefghijklmnopqrstuvwxyz";
   let result = "";
 
