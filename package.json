@@ -2,7 +2,7 @@
   "name": "ocean",
   "version": "1.0.0",
   "author": "Jacob Samuel G.",
-  "description": "Personal libreries for javascript",
+  "description": "Personal libraries for javascript",
   "private": true,
   "type": "module",
   "workspaces": [

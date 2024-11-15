@@ -1,4 +1,4 @@
-# Personal libreries for javascript
+# Personal libraries for javascript
 
 ## Goals:
 - Modular
