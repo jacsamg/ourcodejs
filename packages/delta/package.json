@@ -5,6 +5,10 @@
   "description": "Node.js server router",
   "type": "module",
   "main": "./dist/index.js",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "clean": "del-cli -f ./dist && del-cli -f ./cache/.tsbuildinfo",
     "tsc": "tsc",
