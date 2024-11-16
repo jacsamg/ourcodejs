@@ -1,13 +1,14 @@
 # 🌊 Oceann 
 Personal libraries for javascript
 
-## 🎯 Goals
+## Features
 - Modular 📦
 - Testable 🧪
 - Tree-shakable 🌳
 - All in TypeScript (ESM) 💙
 - Code easy to understand 🧐
-- Minimal third-party dependencies 🔌
+- Minimal third-party dependencies 🤏
+- Designed to combine together 🤝
 
 ## Packages
 - [@oceann/delta](https://github.com/jacsamg/oceann/tree/main/packages/delta)
