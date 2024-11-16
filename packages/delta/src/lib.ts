@@ -52,7 +52,7 @@ export class DeltaRouter {
     }
   }
 
-  public getRoute(method: string, path: string): DeltaRoute | null {
+  public getRoute(method: string = '', path: string = ''): DeltaRoute | null {
     const pieces: string[] = path.split('/').filter(Boolean);
     const params = new Map<string, string>();
     let currentNode = this.root;
@@ -80,6 +80,6 @@ export class DeltaRouter {
   }
 }
 
-export function createRouter(items: DeltaRouteSetup[]): DeltaRouter {
+export function createRouter(...items: DeltaRouteSetup[]): DeltaRouter {
   return new DeltaRouter(items);
 }
