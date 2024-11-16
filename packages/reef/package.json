@@ -8,6 +8,10 @@
   "publishConfig": {
     "access": "public"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jacsamg/oceann.git"
+  },
   "scripts": {
     "clean": "del-cli -f ./dist && del-cli -f ./cache/.tsbuildinfo",
     "tsc": "tsc",
