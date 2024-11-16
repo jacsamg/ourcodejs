@@ -1,10 +1,13 @@
 {
-  "name": "@ocean/river",
+  "name": "@oceann/river",
   "version": "0.1.0",
   "author": "Jacob Samuel G.",
   "description": "Node.js server handler with middleware flow",
   "type": "module",
   "main": "./dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "clean": "del-cli -f ./dist && del-cli -f ./cache/.tsbuildinfo",
     "tsc": "tsc",

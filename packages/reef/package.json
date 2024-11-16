@@ -1,10 +1,13 @@
 {
-  "name": "@ocean/reef",
+  "name": "@oceann/reef",
   "version": "0.1.0",
   "author": "Jacob Samuel G.",
   "description": "Utilities for work with primitives and objects",
   "type": "module",
   "main": "./dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "clean": "del-cli -f ./dist && del-cli -f ./cache/.tsbuildinfo",
     "tsc": "tsc",
