@@ -1,7 +1,7 @@
 # 🌊 Oceann 
 Personal libraries for javascript
 
-## 🎯 Goals:
+## 🎯 Goals
 - Modular 📦
 - Testable 🧪
 - Tree-shakable 🌳
