@@ -12,6 +12,7 @@
   ],
   "scripts": {
     "build": "npm run build --workspaces",
-    "publish": "npm run npm:publish --workspaces"
+    "publish": "npm run npm:publish --workspaces",
+    "test": "npm run test --workspaces"
   }
 }
