@@ -18,6 +18,9 @@
     "build": "npm run clean && npm run tsc",
     "test": "mocha --config ./.mocharc.json"
   },
+  "dependencies": {
+    "@oceann/reef": "^0.1.0"
+  },
   "devDependencies": {
     "@types/chai": "^5.0.1",
     "@types/mocha": "^10.0.9",
