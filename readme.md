@@ -11,6 +11,8 @@ Personal libraries for javascript
 - Designed to combine together 🤝
 
 ## Packages
+- [@oceann/coral](https://github.com/jacsamg/oceann/tree/master/packages/coral)
+  - Helpers for working with datetime powered by Luxon
 - [@oceann/delta](https://github.com/jacsamg/oceann/tree/master/packages/delta)
   - Node.js server router
 - [@oceann/reef](https://github.com/jacsamg/oceann/tree/master/packages/reef)

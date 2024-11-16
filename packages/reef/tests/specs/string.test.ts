@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import {
   capitalizeWords,
   naturalSort,
-  getRandomChartset,
+  getRandomCharset,
   getConvenientStringFormat,
   getOnlyAlphaNumeric,
   checkEmail,
@@ -26,9 +26,9 @@ describe('string', () => {
     });
   });
 
-  describe('getRandomChartset', () => {
+  describe('getRandomCharset', () => {
     it('should return a random string of the specified size', () => {
-      const result = getRandomChartset(10);
+      const result = getRandomCharset(10);
       expect(result).to.have.lengthOf(10);
     });
   });

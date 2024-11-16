@@ -1,8 +1,10 @@
 import { DeltaRouter } from './lib.js';
 
+export type DeltaHttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | 'OPTIONS' | 'CONNECT' | 'TRACE' | 'ALL';
+
 export type HandlerFn = (...args: any[]) => (void | Promise<void>);
 
-export interface PathPiece {
+export interface DeltaPathPiece {
   value: string;
   isParam: boolean;
 }
@@ -14,5 +16,6 @@ export interface DeltaRoute {
 
 export interface DeltaRouteSetup {
   path: string;
-  handler: HandlerFn | DeltaRouter;
+  method: DeltaHttpMethod;
+  resolver: HandlerFn | DeltaRouter;
 }

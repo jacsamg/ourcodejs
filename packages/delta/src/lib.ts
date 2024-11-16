@@ -1,7 +1,15 @@
-import { DeltaRoute, DeltaRouteSetup, HandlerFn, PathPiece } from './types.js';
-import { DeltaTrieNode, getPathPieces } from './utils.js';
+import { DeltaRoute, DeltaRouteSetup, HandlerFn, DeltaPathPiece, DeltaHttpMethod } from './types.js';
+import { getDeltaPathPieces } from './utils.js';
 
 const PARAM_PIECE_KEY = '*';
+
+class DeltaTrieNode {
+  public readonly children: Map<string, DeltaTrieNode> = new Map();
+
+  public piece: string | null = null;
+  public method: DeltaHttpMethod | null = null;
+  public handler: HandlerFn | null = null;
+}
 
 export class DeltaRouter {
   private readonly root: DeltaTrieNode = new DeltaTrieNode();
@@ -9,7 +17,8 @@ export class DeltaRouter {
 
   constructor(items: DeltaRouteSetup[]) {
     for (const item of items) {
-      const pieces: PathPiece[] = getPathPieces(item.path);
+      const pieces: DeltaPathPiece[] = getDeltaPathPieces(item.path);
+      const resolver = item.resolver;
       let currentNode = this.root;
 
       for (const piece of pieces) {
@@ -23,11 +32,14 @@ export class DeltaRouter {
         currentNode = currentNode.children.get(pieceKey)!;
       }
 
-      if (item.handler instanceof DeltaRouter) {
+      if (resolver instanceof DeltaRouter) {
         // For nested DeltaRouter, add its root's children to the current node's children
-        for (const [key, childNode] of item.handler.children.entries()) {
-          if (!currentNode.children.has(key)) currentNode.children.set(key, childNode);
-          else throw new Error('Router already exists for this route!');
+        for (const [key, childNode] of resolver.children.entries()) {
+          if (currentNode.children.has(key)) {
+            throw new Error('Router already exists for this route!');
+          }
+
+          currentNode.children.set(key, childNode);
         }
       }
 
@@ -35,11 +47,12 @@ export class DeltaRouter {
         throw new Error('Handler already exists for this route!');
       }
 
-      currentNode.handler = <HandlerFn>item.handler;
+      currentNode.method = item.method;
+      currentNode.handler = <HandlerFn>resolver;
     }
   }
 
-  public getRoute(path: string): DeltaRoute | null {
+  public getRoute(method: string, path: string): DeltaRoute | null {
     const pieces: string[] = path.split('/').filter(Boolean);
     const params = new Map<string, string>();
     let currentNode = this.root;
@@ -59,9 +72,14 @@ export class DeltaRouter {
       return null;
     }
 
-    return {
-      params,
-      handler: currentNode.handler!
-    };
+    if ((method !== currentNode.method) || (!currentNode.handler)) {
+      return null;
+    }
+
+    return { params, handler: currentNode.handler };
   }
+}
+
+export function createRouter(items: DeltaRouteSetup[]): DeltaRouter {
+  return new DeltaRouter(items);
 }

@@ -7,7 +7,6 @@ export interface RiverEvent {
   params: Map<string, string>;
 }
 
-export type RiverHttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | 'OPTIONS' | 'CONNECT' | 'TRACE' | 'ALL';
 export type RiverMiddlewareResponse = Promise<boolean | void> | boolean | void;
 export type RiverHandlerResponse = Promise<void> | void;
 export type MiddlewareNextFn = () => boolean;
@@ -38,7 +37,6 @@ export interface RiverEndpointConfig {
 }
 
 export interface RiverEndpointOptions {
-  method: RiverHttpMethod;
   handler: RiverHandlerDefinition;
   middlewares?: RiverMiddlewareDefinition[];
   errorHandler?: RiverErrorHandlerDefinition;

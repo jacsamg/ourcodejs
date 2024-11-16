@@ -1,10 +1,10 @@
 {
-  "name": "@oceann/reef",
-  "version": "0.1.2",
+  "name": "@oceann/coral",
+  "version": "0.1.0",
   "license": "MIT",
   "author": "Jacob Samuel G.",
   "homepage": "https://github.com/jacsamg/oceann",
-  "description": "Utilities for work with primitives and objects",
+  "description": "Helpers for working with datetime powered by Luxon",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -25,6 +25,9 @@
     "build": "npm run clean && npm run tsc",
     "test": "mocha --config ./.mocharc.json",
     "npm:publish": "npm publish"
+  },
+  "dependencies": {
+    "luxon": "^3.5.0"
   },
   "devDependencies": {
     "@types/chai": "^5.0.1",

@@ -1,2 +1,2 @@
 export { DeltaRouteSetup } from './types.js';
-export { DeltaRouter } from './lib.js';
+export { createRouter } from './lib.js';

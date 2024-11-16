@@ -1,58 +1,17 @@
 import { expect } from 'chai';
+import { coralDateTime } from '../../src/lib';
 import {
-  setTimezone,
-  getTimezone,
-  getDateTime,
-  getDate,
+  convertOffsetToTimezone,
+  extractOffsetFromISO,
   getLocalTimezone,
   getTimezoneFromDate,
   isValidIsoDateWithTimezone,
-  extractOffsetFromISO,
-  convertOffsetToTimezone,
-  timestampIsSec,
-  timestampIsMs
-} from '../../src/date';
-import { JUAREZ_TIMEZONE, DENVER_TIMEZONE } from '../../src/date';
+  timestampIsMs,
+  timestampIsSec
+} from '../../src/utils';
 import { timezonePattern, timezonePatternWithSeparator } from '../utils/data';
 
-describe('date', () => {
-  describe('setTimezone', () => {
-    it('should set custom timezone', () => {
-      setTimezone(JUAREZ_TIMEZONE);
-      expect(getTimezone().name).to.equal(JUAREZ_TIMEZONE);
-    });
-
-    it('should set fallback timezone', () => {
-      setTimezone('zone/invalid', DENVER_TIMEZONE);
-      expect(getTimezone().name).to.equal(DENVER_TIMEZONE);
-    });
-  });
-
-  describe('getTimezone', () => {
-    it('should return the default timezone', () => {
-      setTimezone(JUAREZ_TIMEZONE);
-      expect(getTimezone().name).to.equal(JUAREZ_TIMEZONE);
-    });
-  });
-
-  describe('getDateTime', () => {
-    it('should return the DateTime instance', () => {
-      const DateTime = getDateTime();
-      const date = DateTime.now().day;
-      const nowDay = new Date().getDate();
-
-      expect(date).to.be.a('number');
-      expect(date).to.equal(nowDay);
-    });
-  });
-
-  describe('getDate', () => {
-    it('should return a DateTime object with the specified timezone', () => {
-      setTimezone(JUAREZ_TIMEZONE);
-      expect(getDate().zoneName).to.equal(JUAREZ_TIMEZONE);
-    });
-  });
-
+describe('utils', () => {
   describe('getLocalTimezone', () => {
     it('should return the local timezone', () => {
       expect(getLocalTimezone()).to.match(timezonePattern);
@@ -61,7 +20,7 @@ describe('date', () => {
 
   describe('getTimezoneFromDate', () => {
     it('should return the timezone from the date', () => {
-      const timezone = getTimezoneFromDate(getDate());
+      const timezone = getTimezoneFromDate(coralDateTime());
       expect(timezone).to.match(timezonePatternWithSeparator);
     });
   });

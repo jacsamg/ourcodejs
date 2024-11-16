@@ -55,24 +55,21 @@ export function createEndpoint(options: RiverEndpointOptions): RiverEndpointFn {
     params: Map<string, string>,
     store = new Map()
   ) => {
-    if ((req.method !== options.method) && (options.method !== 'ALL')) {
-      res.statusCode = 400;
-      res.end();
-      return;
-    }
-
     const event: RiverEvent = { req, res, params, store };
 
     try {
       const next = await runEndpointMiddlewares(event, middlewares);
-      if (next) await options.handler.listen(event);
-    } catch (err: unknown) {
-      const error = err instanceof Error ?
-        err :
-        new Error('Unknown error', { cause: err });
 
-      config.errorLogger(error);
-      errorHandler.listen(event, error);
+      if (next) {
+        await options.handler.listen(event);
+      }
+    } catch (error: unknown) {
+      const err = error instanceof Error ?
+        error :
+        new Error('Unknown error', { cause: error });
+
+      config.errorLogger(err);
+      errorHandler.listen(event, err);
     }
   };
 }
