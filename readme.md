@@ -11,9 +11,9 @@ Personal libraries for javascript
 - Designed to combine together 🤝
 
 ## Packages
-- [@oceann/delta](https://github.com/jacsamg/oceann/tree/main/packages/delta)
+- [@oceann/delta](https://github.com/jacsamg/oceann/tree/master/packages/delta)
   - Node.js server router
-- [@oceann/reef](https://github.com/jacsamg/oceann/tree/main/packages/reef)
+- [@oceann/reef](https://github.com/jacsamg/oceann/tree/master/packages/reef)
   - Utilities for work with primitives and objects
-- [@oceann/river](https://github.com/jacsamg/oceann/tree/main/packages/river)
+- [@oceann/river](https://github.com/jacsamg/oceann/tree/master/packages/river)
   - Node.js server handler with middleware flow
