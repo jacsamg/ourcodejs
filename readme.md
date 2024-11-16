@@ -1,4 +1,5 @@
-# Personal libraries for javascript
+# Oceann 🌊
+Personal libraries for javascript
 
 ## Goals:
 - Modular 📦
