@@ -1,6 +1,6 @@
 {
   "name": "@oceann/river",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
   "author": "Jacob Samuel G.",
   "homepage": "https://github.com/jacsamg/oceann",
@@ -9,8 +9,7 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
-    "./dist",
-    "./readme.md"
+    "./dist"
   ],
   "publishConfig": {
     "access": "public",
@@ -24,10 +23,11 @@
     "clean": "del-cli -f ./dist && del-cli -f ./cache/.tsbuildinfo",
     "tsc": "tsc",
     "build": "npm run clean && npm run tsc",
-    "test": "mocha --config ./.mocharc.json"
+    "test": "mocha --config ./.mocharc.json",
+    "npm:publish": "npm publish"
   },
   "dependencies": {
-    "@oceann/reef": "^0.1.0"
+    "@oceann/reef": "*"
   },
   "devDependencies": {
     "@types/chai": "^5.0.1",

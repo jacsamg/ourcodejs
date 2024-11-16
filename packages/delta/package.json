@@ -1,6 +1,6 @@
 {
   "name": "@oceann/delta",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "license": "MIT",
   "author": "Jacob Samuel G.",
   "homepage": "https://github.com/jacsamg/oceann",
@@ -9,8 +9,7 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
-    "./dist",
-    "./readme.md"
+    "./dist"
   ],
   "publishConfig": {
     "access": "public",
@@ -24,7 +23,8 @@
     "clean": "del-cli -f ./dist && del-cli -f ./cache/.tsbuildinfo",
     "tsc": "tsc",
     "build": "npm run clean && npm run tsc",
-    "test": "mocha --config ./.mocharc.json"
+    "test": "mocha --config ./.mocharc.json",
+    "npm:publish": "npm publish"
   },
   "devDependencies": {
     "@types/chai": "^5.0.1",
