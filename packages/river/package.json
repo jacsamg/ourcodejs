@@ -1,9 +1,9 @@
 {
-  "name": "@oceann/river",
+  "name": "@wecodejs/river",
   "version": "0.1.3",
   "license": "MIT",
   "author": "Jacob Samuel G.",
-  "homepage": "https://github.com/jacsamg/oceann",
+  "homepage": "https://github.com/jacsamg/wecodejs",
   "description": "Node.js server handler with middleware flow",
   "type": "module",
   "main": "./dist/index.js",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jacsamg/oceann.git"
+    "url": "https://github.com/jacsamg/wecodejs.git"
   },
   "scripts": {
     "clean": "del-cli -f ./dist && del-cli -f ./cache/.tsbuildinfo",
@@ -27,7 +27,7 @@
     "npm:publish": "npm publish"
   },
   "dependencies": {
-    "@oceann/reef": "*"
+    "@wecodejs/reef": "*"
   },
   "devDependencies": {
     "@types/chai": "^5.0.1",

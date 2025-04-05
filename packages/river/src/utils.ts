@@ -1,6 +1,6 @@
 import { DEFAULT_RIVER_ENDPOINT_CONFIG } from './data.js';
 import { RiverEndpointConfig, RiverEvent } from './types.js';
-import { objectDeepAssign } from '@oceann/reef';
+import { objectDeepAssign } from '@wecodejs/reef';
 
 export function defaultErrorHandler(event: RiverEvent): void {
   event.res.statusCode = 500;

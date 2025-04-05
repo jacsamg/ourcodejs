@@ -1,3 +1,3 @@
 # River
 - Node.js server handler with middleware flow
-- Install with `npm i @oceann/river`
+- Install with `npm i @wecodejs/river`

@@ -1,9 +1,9 @@
 {
-  "name": "@oceann/sunshine",
+  "name": "@wecodejs/sunshine",
   "version": "0.1.1",
   "license": "MIT",
   "author": "Jacob Samuel G.",
-  "homepage": "https://github.com/jacsamg/oceann",
+  "homepage": "https://github.com/jacsamg/wecodejs",
   "description": "Helpers for working with datetime powered by Luxon",
   "type": "module",
   "main": "./dist/index.js",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jacsamg/oceann.git"
+    "url": "https://github.com/jacsamg/wecodejs.git"
   },
   "scripts": {
     "clean": "del-cli -f ./dist && del-cli -f ./cache/.tsbuildinfo",
