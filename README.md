@@ -1,4 +1,4 @@
-# 🌊 wecodejs 
+# 🎒 wecodejs 
 Personal libraries for javascript
 
 ## Features
