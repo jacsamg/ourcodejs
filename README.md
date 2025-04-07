@@ -1,4 +1,4 @@
-# 🎒 wecodejs 
+# 🎒 ourcodejs 
 Personal libraries for javascript
 
 ## Features
@@ -11,11 +11,11 @@ Personal libraries for javascript
 - Designed to combine together 🤝
 
 ## Packages
-- [@wecodejs/delta](https://github.com/jacsamg/wecodejs/tree/master/packages/delta)
+- [@ourcodejs/delta](https://github.com/jacsamg/ourcodejs/tree/master/packages/delta)
   - Node.js server router
-- [@wecodejs/reef](https://github.com/jacsamg/wecodejs/tree/master/packages/reef)
+- [@ourcodejs/reef](https://github.com/jacsamg/ourcodejs/tree/master/packages/reef)
   - Utilities for work with primitives and objects
-- [@wecodejs/river](https://github.com/jacsamg/wecodejs/tree/master/packages/river)
+- [@ourcodejs/river](https://github.com/jacsamg/ourcodejs/tree/master/packages/river)
   - Node.js server handler with middleware flow
-- [@wecodejs/sunshine](https://github.com/jacsamg/wecodejs/tree/master/packages/sunshine)
+- [@ourcodejs/sunshine](https://github.com/jacsamg/ourcodejs/tree/master/packages/sunshine)
   - Helpers for working with datetime powered by Luxon

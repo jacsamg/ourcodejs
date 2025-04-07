@@ -1,9 +1,9 @@
 {
-  "name": "@wecodejs/delta",
+  "name": "@ourcodejs/delta",
   "version": "0.1.5",
   "license": "MIT",
   "author": "Jacob Samuel G.",
-  "homepage": "https://github.com/jacsamg/wecodejs",
+  "homepage": "https://github.com/jacsamg/ourcodejs",
   "description": "Node.js server router",
   "type": "module",
   "main": "./dist/index.js",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jacsamg/wecodejs.git"
+    "url": "https://github.com/jacsamg/ourcodejs.git"
   },
   "scripts": {
     "clean": "del-cli -f ./dist && del-cli -f ./cache/.tsbuildinfo",

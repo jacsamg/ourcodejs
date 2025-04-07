@@ -1,9 +1,9 @@
 {
-  "name": "@wecodejs/reef",
+  "name": "@ourcodejs/reef",
   "version": "0.1.3",
   "license": "MIT",
   "author": "Jacob Samuel G.",
-  "homepage": "https://github.com/jacsamg/wecodejs",
+  "homepage": "https://github.com/jacsamg/ourcodejs",
   "description": "Utilities for work with primitives and objects",
   "type": "module",
   "main": "./dist/index.js",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jacsamg/wecodejs.git"
+    "url": "https://github.com/jacsamg/ourcodejs.git"
   },
   "scripts": {
     "clean": "del-cli -f ./dist && del-cli -f ./cache/.tsbuildinfo",

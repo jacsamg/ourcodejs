@@ -1,9 +1,9 @@
 {
-  "name": "wecodejs",
+  "name": "ourcodejs",
   "version": "1.0.0",
   "license": "MIT",
   "author": "Jacob Samuel G.",
-  "homepage": "https://github.com/jacsamg/wecodejs",
+  "homepage": "https://github.com/jacsamg/ourcodejs",
   "description": "Personal libraries for javascript",
   "private": true,
   "type": "module",
