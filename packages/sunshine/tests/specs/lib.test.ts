@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import {
-  SunshineDateTime,
+  sunshineDateTime,
   getGlobalTimezone,
   luxonDateTime,
   setGlobalTimezone
@@ -38,10 +38,10 @@ describe('lib', () => {
     });
   });
 
-  describe('SunshineDateTime', () => {
+  describe('sunshineDateTime', () => {
     it('should return a DateTime object with the specified timezone', () => {
       setGlobalTimezone(JUAREZ_TIMEZONE);
-      expect(SunshineDateTime().zoneName).to.equal(JUAREZ_TIMEZONE);
+      expect(sunshineDateTime().zoneName).to.equal(JUAREZ_TIMEZONE);
     });
   });
 });

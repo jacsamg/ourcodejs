@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { SunshineDateTime } from '../../src/lib';
+import { sunshineDateTime } from '../../src/lib';
 import {
   convertOffsetToTimezone,
   extractOffsetFromISO,
@@ -20,7 +20,7 @@ describe('utils', () => {
 
   describe('getTimezoneFromDate', () => {
     it('should return the timezone from the date', () => {
-      const timezone = getTimezoneFromDate(SunshineDateTime());
+      const timezone = getTimezoneFromDate(sunshineDateTime());
       expect(timezone).to.match(timezonePatternWithSeparator);
     });
   });

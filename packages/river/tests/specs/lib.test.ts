@@ -16,9 +16,8 @@ describe('lib', () => {
 
     it('Should call handler when no middleware are present', async () => {
       const store = new Map();
-      const method = 'GET';
       const handler = createHandler((e: RiverEvent) => { e.store.set('test', true); });
-      const endpoint = createEndpoint({ method, handler });
+      const endpoint = createEndpoint({ handler });
 
       await endpoint(createMockReq(), createMockRes(), params, store);
       expect(store.get('test')).to.be.true;
@@ -47,7 +46,6 @@ describe('lib', () => {
         if (test) e.store.set('test', [...test, 4]);
       });
       const endpoint = createEndpoint({
-        method: 'GET',
         handler,
         middlewares: [middleware01, middleware02, middleware03]
       });
@@ -62,7 +60,6 @@ describe('lib', () => {
       });
       let changeOnError = false;
       const endpoint = createEndpoint({
-        method: 'GET',
         handler,
         config: {
           errorLogger: () => {
@@ -83,7 +80,6 @@ describe('lib', () => {
         throw new Error("Test error");
       });
       const endpoint = createEndpoint({
-        method: 'GET',
         handler,
         config: { errorLogger: () => void 0 }
       });
@@ -104,7 +100,6 @@ describe('lib', () => {
         e.store.set('error', true);
       });
       const endpoint = createEndpoint({
-        method: 'GET',
         handler, errorHandler,
         config: { errorLogger: () => void 0 }
       });
