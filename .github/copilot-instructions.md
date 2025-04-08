@@ -1,0 +1,1 @@
+Utiliza "Conventional Commits" para tus mensajes de commit.
