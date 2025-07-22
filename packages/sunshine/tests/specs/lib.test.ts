@@ -1,11 +1,13 @@
 import { expect } from "chai";
-import { DENVER_TIMEZONE, JUAREZ_TIMEZONE } from "../../src/data";
 import {
 	getGlobalTimezone,
 	luxonDateTime,
 	setGlobalTimezone,
 	sunshineDateTime,
 } from "../../src/lib";
+
+const JUAREZ_TIMEZONE = "America/Ciudad_Juarez";
+const DENVER_TIMEZONE = "America/Denver";
 
 describe("lib", () => {
 	describe("setGlobalTimezone", () => {
