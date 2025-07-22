@@ -1,13 +1,11 @@
 {
   "name": "@ourcodejs/sunshine",
-  "version": "1.0.1",
+  "version": "1.0.6",
   "license": "MIT",
   "author": "Jacob Samuel G.",
   "homepage": "https://github.com/jacsamg/ourcodejs",
   "description": "Helpers for working with datetime powered by Luxon",
   "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
   "files": [
     "./dist"
   ],
@@ -25,15 +23,15 @@
     "build": "npm run clean && npm run tsc",
     "lint": "biome lint",
     "test": "mocha --config ./.mocharc.json",
-    "publish": "npm publish"
+    "npm:publish": "npm publish"
   },
   "dependencies": {
-    "luxon": "^3.5.0"
+    "luxon": "^3.5.0",
+    "@types/luxon": "^3.4.2"
   },
   "devDependencies": {
     "@biomejs/biome": "2.1.2",
     "@types/chai": "^5.0.1",
-    "@types/luxon": "^3.4.2",
     "@types/mocha": "^10.0.9",
     "@types/node": "^22.9.0",
     "chai": "^5.1.2",
