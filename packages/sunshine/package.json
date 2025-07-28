@@ -1,6 +1,6 @@
 {
   "name": "@ourcodejs/sunshine",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "license": "MIT",
   "author": "Jacob Samuel G.",
   "homepage": "https://github.com/jacsamg/ourcodejs",
@@ -20,14 +20,14 @@
     "url": "https://github.com/jacsamg/ourcodejs.git"
   },
   "scripts": {
+    "lint": "biome lint",
+    "test": "mocha --config ./.mocharc.json",
     "clean": "del-cli -f ./dist && del-cli -f ./cache/.tsbuildinfo",
     "tsc": "tsc",
     "build": "npm run clean && npm run tsc",
-    "lint": "biome lint",
-    "test": "mocha --config ./.mocharc.json",
     "npm:publish": "npm publish"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@types/luxon": "^3.6.2",
     "luxon": "^3.7.1"
   },
