@@ -1,7 +1,6 @@
 # directories
 .angular
 .nx
-.vscode
 build
 cache
 dist
