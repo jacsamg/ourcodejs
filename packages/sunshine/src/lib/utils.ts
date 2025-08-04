@@ -2,7 +2,7 @@ import { DateTime } from 'luxon';
 
 /**
   @returns {string} The short offset of the timezone in the format:
-                    '+HH:MM' or '-HH:MM'. (E.g. -06:00).
+                    '+HH:MM' or '-HH:MM' (E.g. -06:00).
 */
 export function getTimezoneShortOffset(date: DateTime): string {
   return date.toFormat('ZZ');
