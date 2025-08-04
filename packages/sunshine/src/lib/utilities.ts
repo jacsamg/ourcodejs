@@ -4,7 +4,9 @@ import { DateTime } from 'luxon';
   @returns {string} The short offset of the timezone in the format:
                     '+HH:MM' or '-HH:MM' (E.g. -06:00).
 */
-export function getTimezoneShortOffset(date: DateTime): string {
+export function getTimezoneShortOffset(
+  date: DateTime = DateTime.now(),
+): string {
   return date.toFormat('ZZ');
 }
 
@@ -12,7 +14,9 @@ export function getTimezoneShortOffset(date: DateTime): string {
   @returns {string} The techie offset of the timezone in the format:
                     '+HHMM' or '-HHMM' (E.g. -0600).
 */
-export function getTimezoneTechieOffset(date: DateTime): string {
+export function getTimezoneTechieOffset(
+  date: DateTime = DateTime.now(),
+): string {
   return date.toFormat('ZZZ');
 }
 

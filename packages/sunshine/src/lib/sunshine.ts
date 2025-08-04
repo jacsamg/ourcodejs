@@ -5,7 +5,7 @@ import type {
   ShunshineValidDateType,
   SunshineFalsyDateType,
 } from '../types/types.js';
-import { timestampIsMs, timestampIsSec } from './utils.js';
+import { timestampIsMs, timestampIsSec } from './utilities.js';
 
 let SUNSHINE_DEFAULT_ZONE = DEFAULT_TIMEZONE;
 

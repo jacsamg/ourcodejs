@@ -19,4 +19,4 @@ export {
   isValidIsoDateWithTimezone,
   timestampIsMs,
   timestampIsSec,
-} from './lib/utils.js';
+} from './lib/utilities.js';
