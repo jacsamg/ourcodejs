@@ -14,8 +14,8 @@ export {
 export {
   convertOffsetToTimezone,
   extractOffsetFromISO,
-  getLocalTimezone,
-  getTimezoneFromDate,
+  getTimezoneShortOffset,
+  getTimezoneTechieOffset,
   isValidIsoDateWithTimezone,
   timestampIsMs,
   timestampIsSec,
