@@ -1,23 +1,14 @@
-import { IANAZone, type Settings, type Zone } from "luxon";
-import { DEFAULT_TIMEZONE } from "../data/data.js";
+import { IANAZone, Settings, type Zone } from 'luxon';
+import { DEFAULT_TIMEZONE } from '../data/data.js';
 
-export function setLuxonThrowOnInvalid(
-	throwOnInvalid: boolean,
-	settings: typeof Settings,
-) {
-	settings.throwOnInvalid = throwOnInvalid;
+export function getLuxonGlobalTimezone(): Zone<true> {
+  return Settings.defaultZone;
 }
 
 export function setLuxonGlobalTimezone(
-	primary: string,
-	fallback = DEFAULT_TIMEZONE,
-	settings: typeof Settings,
-) {
-	settings.defaultZone = IANAZone.isValidZone(primary) ? primary : fallback;
-}
-
-export function getLuxonGlobalTimezone(
-	settings: typeof Settings,
-): Zone<true | false> {
-	return settings.defaultZone;
+  primary: string,
+  fallback = DEFAULT_TIMEZONE,
+): Zone<true> {
+  Settings.defaultZone = IANAZone.isValidZone(primary) ? primary : fallback;
+  return getLuxonGlobalTimezone();
 }
