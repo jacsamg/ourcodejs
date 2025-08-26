@@ -1,9 +1,8 @@
-import { Settings } from 'luxon';
-
 export { DEFAULT_TIMEZONE } from './data/data.js';
 export {
   getLuxonGlobalTimezone,
   setLuxonGlobalTimezone,
+  setLuxonThrowOnInvalid,
 } from './lib/luxon.js';
 
 export {
@@ -14,6 +13,3 @@ export {
   timestampIsMs,
   timestampIsSec,
 } from './lib/utilities.js';
-
-// GLOBAL LUXON SETTINGS
-Settings.throwOnInvalid = true;

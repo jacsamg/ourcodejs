@@ -12,3 +12,7 @@ export function setLuxonGlobalTimezone(
   Settings.defaultZone = IANAZone.isValidZone(primary) ? primary : fallback;
   return getLuxonGlobalTimezone();
 }
+
+export function setLuxonThrowOnInvalid(status: boolean): void {
+  Settings.throwOnInvalid = status;
+}
