@@ -2,7 +2,6 @@ import { expect } from 'chai';
 import {
   removeIndexFromArray,
   shuffleArray,
-  getShuffleArray,
   reverseFilter
 } from '../../src/array';
 
@@ -23,15 +22,6 @@ describe('array', () => {
 
       expect(array).to.deep.equal(result);
       expect(result).to.not.deep.equal([1, 2, 3, 4, 5]);
-    });
-  });
-
-  describe('getShuffleArray', () => {
-    it('Should get shuffle shallow copy of the original array', () => {
-      const array = [1, 2, 3, 4, 5];
-      const result = getShuffleArray(array);
-
-      expect(array).to.not.deep.equal(result);
     });
   });
 

@@ -15,18 +15,6 @@ export function shuffleArray<T>(array: T[]): T[] {
   return array;
 }
 
-export function getShuffleArray<T>(array: T[]): T[] {
-  // Shallow copy of the array
-  const newArray = array.slice();
-
-  for (let i = newArray.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
-  }
-
-  return newArray;
-}
-
 export function reverseFilter<T>(
   container: T[],
   filterFn: (content: T) => boolean,
