@@ -1,6 +1,5 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "Node 22",
   "compilerOptions": {
     "module": "esnext",
     "moduleResolution": "nodenext",
