@@ -1,5 +1,5 @@
 {
-  "extends": "../../common.tsconfig.json",
+  "extends": "../../esm.tsconfig.json",
   "compilerOptions": {
     "composite": true,
     "outDir": "./dist",

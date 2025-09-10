@@ -22,8 +22,3 @@ Personal libraries for Javascript
   - Node.js server handler with middleware flow
 - [@ourcodejs/sunshine](https://github.com/jacsamg/ourcodejs/tree/master/packages/sunshine)
   - Helpers to working with datetime powered by Luxon
-
-## Pending
-
-[] Add tests
-[] Add docs
