@@ -14,11 +14,11 @@ Personal libraries for Javascript
 
 ## Packages
 
-- [@ourcodejs/delta](https://github.com/jacsamg/ourcodejs/tree/master/packages/delta)
+- [@ourcodejs/delta](https://github.com/jacsamg/ourcodejs/tree/main/packages/delta)
   - Node.js server router
-- [@ourcodejs/reef](https://github.com/jacsamg/ourcodejs/tree/master/packages/reef)
+- [@ourcodejs/reef](https://github.com/jacsamg/ourcodejs/tree/main/packages/reef)
   - Utilities to work with primitives and objects
-- [@ourcodejs/river](https://github.com/jacsamg/ourcodejs/tree/master/packages/river)
+- [@ourcodejs/river](https://github.com/jacsamg/ourcodejs/tree/main/packages/river)
   - Node.js server handler with middleware flow
-- [@ourcodejs/sunshine](https://github.com/jacsamg/ourcodejs/tree/master/packages/sunshine)
+- [@ourcodejs/sunshine](https://github.com/jacsamg/ourcodejs/tree/main/packages/sunshine)
   - Helpers to working with datetime powered by Luxon
