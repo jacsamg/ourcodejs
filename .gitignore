@@ -1,17 +1,15 @@
 # directories
-.angular
-.nx
 build
 cache
 dist
 node_modules
 secrets
-www
+temp
 
 # files
 dev.env
 prod.env
-npm-debug.log
+*.log
 
 # system files
 .DS_Store
