@@ -1,6 +1,6 @@
 {
   "name": "@ourcodejs/reef",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "author": "Jacob Samuel G.",
   "homepage": "https://github.com/jacsamg/ourcodejs",
@@ -20,6 +20,7 @@
     "url": "https://github.com/jacsamg/ourcodejs.git"
   },
   "scripts": {
+    "lint": "biome lint",
     "clean": "del-cli -f ./dist && del-cli -f ./cache/.tsbuildinfo",
     "tsc": "tsc",
     "build": "npm run clean && npm run tsc",
