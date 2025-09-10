@@ -20,5 +20,3 @@ Personal libraries for Javascript
   - Utilities to work with primitives and objects
 - [@ourcodejs/river](https://github.com/jacsamg/ourcodejs/tree/main/packages/river)
   - Node.js server handler with middleware flow
-- [@ourcodejs/sunshine](https://github.com/jacsamg/ourcodejs/tree/main/packages/sunshine)
-  - Helpers to working with datetime powered by Luxon
