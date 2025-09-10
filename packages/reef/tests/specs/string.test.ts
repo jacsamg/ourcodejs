@@ -8,7 +8,7 @@ import {
   checkEmail,
   toBase64InBrowser,
   fromBase64InBrowser
-} from '../../src/string';
+} from '../../src/lib/string';
 import { helloWorldInBase64 } from '../utils/data';
 
 describe('string', () => {

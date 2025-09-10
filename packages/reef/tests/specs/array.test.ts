@@ -3,7 +3,7 @@ import {
   removeIndexFromArray,
   shuffleArray,
   reverseFilter
-} from '../../src/array';
+} from '../../src/lib/array';
 
 describe('array', () => {
   describe('removeIndexFromArray', () => {

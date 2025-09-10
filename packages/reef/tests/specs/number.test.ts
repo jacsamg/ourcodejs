@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { getRandomIntInclusive, padStartWithZeros } from '../../src/number';
+import { getRandomIntInclusive, padStartWithZeros } from '../../src/lib/number';
 
 describe('number', () => {
   describe('getRandomIntInclusive', () => {

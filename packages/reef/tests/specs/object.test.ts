@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { objectDeepAssign } from '../../src/object';
+import { objectDeepAssign } from '../../src/lib/object';
 
 describe('object', () => {
   describe('objectDeepAssign', () => {

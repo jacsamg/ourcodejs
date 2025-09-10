@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { isAsyncFn } from '../../src/fns';
+import { isAsyncFn } from '../../src/lib/fns';
 
 describe('fns', () => {
   describe('isAsyncFn', () => {
