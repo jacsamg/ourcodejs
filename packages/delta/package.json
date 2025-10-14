@@ -1,6 +1,6 @@
 {
   "name": "@ourcodejs/delta",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "license": "MIT",
   "author": "Jacob Samuel G.",
   "homepage": "https://github.com/jacsamg/ourcodejs",
@@ -25,7 +25,8 @@
     "test": "mocha --config ./.mocharc.json",
     "clean": "our-delete ./dist ./cache/.tsbuildinfo --force",
     "tsc": "tsc",
-    "build": "npm run clean && npm run tsc"
+    "build": "npm run clean && npm run tsc",
+    "release": "npm run build && npm publish"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.2.6",
