@@ -1,4 +1,4 @@
-import { IncomingMessage, ServerResponse } from 'node:http';
+import type { IncomingMessage, ServerResponse } from 'node:http';
 
 export interface RiverEvent {
   req: IncomingMessage;
@@ -7,17 +7,27 @@ export interface RiverEvent {
   params: Map<string, string>;
 }
 
-export type RiverMiddlewareResponse = Promise<boolean | void> | boolean | void;
+export type RiverMiddlewareResponse =
+  | Promise<boolean | undefined>
+  | boolean
+  | undefined;
 export type RiverHandlerResponse = Promise<void> | void;
 export type MiddlewareNextFn = () => boolean;
-export type RiverMiddlewareFn = (event: RiverEvent, next: MiddlewareNextFn) => RiverMiddlewareResponse;
+export type RiverMiddlewareFn = (
+  event: RiverEvent,
+  next: MiddlewareNextFn,
+) => RiverMiddlewareResponse;
 export type RiverHandlerFn = (event: RiverEvent) => RiverHandlerResponse;
-export type RiverErrorHandlerFn = (event: RiverEvent, error: Error) => RiverHandlerResponse;
+export type RiverErrorHandlerFn = (
+  event: RiverEvent,
+  error: Error,
+) => RiverHandlerResponse;
 export type RiverEndpointFn = (
   req: IncomingMessage,
   res: ServerResponse,
   params: Map<string, string>,
-  store: Map<string, any>
+  // biome-ignore lint/suspicious/noExplicitAny: this is a generic store
+  store: Map<string, any>,
 ) => RiverHandlerResponse;
 
 export interface RiverMiddlewareDefinition {
@@ -33,7 +43,9 @@ export interface RiverErrorHandlerDefinition {
 }
 
 export interface RiverEndpointConfig {
-  errorLogger: (...args: unknown[]) => void;
+  [key: PropertyKey]: string | number | boolean | object;
+  // biome-ignore lint/suspicious/noExplicitAny: this is a generic logger
+  errorLogger: (...args: any[]) => void;
 }
 
 export interface RiverEndpointOptions {
