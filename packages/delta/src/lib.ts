@@ -39,17 +39,17 @@ export class DeltaRouter {
 
     if (resolver instanceof DeltaRouter) {
       // For nested DeltaRouter, add its root's children to the current node's children
-      for (const [key, childNode] of resolver.children.entries()) {
-        if (currentNode.children.has(key)) {
-          throw new Error('Router already exists for this route!');
+      for (const [segmentKey, childNode] of resolver.children.entries()) {
+        if (currentNode.children.has(segmentKey)) {
+          throw new Error('Node already exists for this segment!');
         }
 
-        currentNode.children.set(key, childNode);
+        currentNode.children.set(segmentKey, childNode);
       }
     }
 
     if (currentNode.handler !== null) {
-      throw new Error('Handler already exists for this route!');
+      throw new Error('Handler already exists for this node!');
     }
 
     currentNode.method = route.method;
@@ -57,20 +57,20 @@ export class DeltaRouter {
   }
 
   public getRoute(method: string = '', path: string = ''): DeltaRoute | null {
-    const segments: string[] = path.split('/').filter(Boolean);
+    const segmentKeys: string[] = path.split('/').filter(Boolean);
     const params = new Map<string, string>();
     let currentNode = this.root;
 
-    for (const segment of segments) {
-      if (currentNode.children.has(segment)) {
-        currentNode = currentNode.children.get(segment)!;
+    for (const segmentKey of segmentKeys) {
+      if (currentNode.children.has(segmentKey)) {
+        currentNode = currentNode.children.get(segmentKey)!;
         continue;
       }
 
       const paramNode = currentNode.children.get(SEGMENT_PARAM_KEY);
       if (paramNode) {
         currentNode = paramNode;
-        params.set(currentNode.segment!.value, segment);
+        params.set(currentNode.segment!.value, segmentKey);
         continue;
       }
 
