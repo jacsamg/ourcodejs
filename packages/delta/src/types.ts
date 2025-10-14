@@ -1,8 +1,19 @@
-import { DeltaRouter } from './lib.js';
+import type { DeltaRouter } from './lib.js';
 
-export type DeltaHttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | 'OPTIONS' | 'CONNECT' | 'TRACE' | 'ALL';
+export type DeltaHttpMethod =
+  | 'GET'
+  | 'POST'
+  | 'PUT'
+  | 'DELETE'
+  | 'PATCH'
+  | 'HEAD'
+  | 'OPTIONS'
+  | 'CONNECT'
+  | 'TRACE'
+  | 'ALL';
 
-export type HandlerFn = (...args: any[]) => (void | Promise<void>);
+// biome-ignore lint/suspicious/noExplicitAny: this is a generic handler type
+export type HandlerFn = (...args: any[]) => void | Promise<void>;
 
 export interface DeltaSegmentInfo {
   value: string;

@@ -1,4 +1,10 @@
-import { DeltaRoute, DeltaRouteSetup, HandlerFn, DeltaSegmentInfo, DeltaHttpMethod } from './types.js';
+import type {
+  DeltaHttpMethod,
+  DeltaRoute,
+  DeltaRouteSetup,
+  DeltaSegmentInfo,
+  HandlerFn,
+} from './types.js';
 import { getSegments } from './utils.js';
 
 const SEGMENT_PARAM_KEY = '*';
@@ -34,7 +40,7 @@ export class DeltaRouter {
       }
 
       currentNode.segment = segment;
-      currentNode = currentNode.children.get(segmentKey)!; // Move to the child node
+      currentNode = <DeltaNode>currentNode.children.get(segmentKey); // Move to the child node
     }
 
     if (resolver instanceof DeltaRouter) {
@@ -63,21 +69,21 @@ export class DeltaRouter {
 
     for (const segmentKey of segmentKeys) {
       if (currentNode.children.has(segmentKey)) {
-        currentNode = currentNode.children.get(segmentKey)!;
+        currentNode = <DeltaNode>currentNode.children.get(segmentKey);
         continue;
       }
 
       const paramNode = currentNode.children.get(SEGMENT_PARAM_KEY);
       if (paramNode) {
         currentNode = paramNode;
-        params.set(currentNode.segment!.value, segmentKey);
+        params.set((<DeltaSegmentInfo>currentNode.segment).value, segmentKey);
         continue;
       }
 
       return null;
     }
 
-    if ((method !== currentNode.method) || !currentNode.handler) {
+    if (method !== currentNode.method || !currentNode.handler) {
       return null;
     }
 

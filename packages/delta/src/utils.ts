@@ -1,4 +1,4 @@
-import { DeltaSegmentInfo } from './types.js';
+import type { DeltaSegmentInfo } from './types.js';
 
 function segmentIsParam(segment: string): boolean {
   return segment.startsWith(':');
