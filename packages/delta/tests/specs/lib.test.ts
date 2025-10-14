@@ -25,10 +25,10 @@ describe('lib', () => {
       expect(router.getRoute('GET', '/a/this-is-a-param/c')).to.not.be.null;
     });
 
-    // it('Should add route with query param and return route', () => {
-    //   const router = createRouter(BASIC_ROUTE);
-    //   expect(router.getRoute('GET', '/a/b/c?foo=bar')).to.not.be.null;
-    // });
+    it('Should add route with query param and return route', () => {
+      const router = createRouter(BASIC_ROUTE);
+      expect(router.getRoute('GET', '/a/b/c?foo=bar')).to.not.be.null;
+    });
 
     it('Should work with nested routes', () => {
       const router01 = createRouter({ method: 'GET', path: '/c', resolver: () => { } });

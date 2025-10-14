@@ -62,7 +62,7 @@ export class DeltaRouter {
   }
 
   public getRoute(method: string = '', path: string = ''): DeltaRoute | null {
-    const segmentKeys: string[] = path.split('/').filter(Boolean);
+    const segmentKeys: string[] = path.split('?')[0].split('/').filter(Boolean);
     const params = new Map<string, string>();
     let currentNode = this.root;
 
