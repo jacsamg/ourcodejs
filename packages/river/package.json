@@ -20,22 +20,24 @@
     "url": "https://github.com/jacsamg/ourcodejs.git"
   },
   "scripts": {
-    "clean": "del-cli -f ./dist && del-cli -f ./cache/.tsbuildinfo",
-    "tsc": "tsc",
-    "build": "npm run clean && npm run tsc",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check",
     "test": "mocha --config ./.mocharc.json",
-    "npm:publish": "npm publish"
+    "clean": "our-delete ./dist ./cache/.tsbuildinfo --force",
+    "tsc": "tsc",
+    "build": "npm run clean && npm run tsc"
   },
   "dependencies": {
     "@ourcodejs/reef": "*"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.2.6",
+    "@ourcodecli/delete": "^1.0.1",
     "@types/chai": "^5.0.1",
     "@types/mocha": "^10.0.9",
     "@types/node": "^22.9.0",
     "@types/sinon": "^17.0.3",
     "chai": "^5.1.2",
-    "del-cli": "^6.0.0",
     "mocha": "^10.8.2",
     "sinon": "^19.0.2",
     "tsx": "^4.19.2",
