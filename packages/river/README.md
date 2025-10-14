@@ -22,7 +22,7 @@ const endpoint = createEndpoint({ handler });
 const server = http.createServer((req, res) => {
   // For simplicity, handle all requests with this endpoint
   // In a real app, you'd route based on req.url
-  endpoint(req, res, new Map());
+  endpoint(req, res);
 });
 
 server.listen(3000, () => {

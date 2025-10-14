@@ -52,7 +52,7 @@ export function createEndpoint(options: RiverEndpointOptions): RiverEndpointFn {
   return async (
     req: IncomingMessage,
     res: ServerResponse,
-    params: Map<string, string>,
+    params = new Map(),
     store = new Map()
   ) => {
     const event: RiverEvent = { req, res, params, store };
