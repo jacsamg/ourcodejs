@@ -3,8 +3,8 @@ import { getDeltaPathPieces } from './utils.js';
 
 const PARAM_PIECE_KEY = '*';
 
-class DeltaTrieNode {
-  public readonly children: Map<string, DeltaTrieNode> = new Map();
+class DeltaNode {
+  public readonly children: Map<string, DeltaNode> = new Map();
 
   public piece: string | null = null;
   public method: DeltaHttpMethod | null = null;
@@ -12,7 +12,7 @@ class DeltaTrieNode {
 }
 
 export class DeltaRouter {
-  private readonly root: DeltaTrieNode = new DeltaTrieNode();
+  private readonly root: DeltaNode = new DeltaNode();
   public readonly children = this.root.children;
 
   constructor(items: DeltaRouteSetup[]) {
@@ -25,7 +25,7 @@ export class DeltaRouter {
         const pieceKey = piece.isParam ? PARAM_PIECE_KEY : piece.value;
 
         if (!currentNode.children.has(pieceKey)) {
-          currentNode.children.set(pieceKey, new DeltaTrieNode());
+          currentNode.children.set(pieceKey, new DeltaNode());
         }
 
         currentNode.piece = piece.isParam ? piece.value.slice(1) : piece.value;
