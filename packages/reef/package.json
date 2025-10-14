@@ -1,6 +1,6 @@
 {
   "name": "@ourcodejs/reef",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "license": "MIT",
   "author": "Jacob Samuel G.",
   "homepage": "https://github.com/jacsamg/ourcodejs",
@@ -25,7 +25,7 @@
     "tsc": "tsc",
     "build": "npm run clean && npm run tsc",
     "test": "mocha --config ./.mocharc.json",
-    "npm:publish": "npm publish"
+    "release": "npm run build && npm publish"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.2.3",
