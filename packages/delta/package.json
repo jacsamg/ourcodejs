@@ -20,11 +20,12 @@
     "url": "https://github.com/jacsamg/ourcodejs.git"
   },
   "scripts": {
+    "typecheck": "tsc --noEmit",
     "lint": "biome check",
+    "test": "mocha --config ./.mocharc.json",
     "clean": "our-delete ./dist ./cache/.tsbuildinfo --force",
     "tsc": "tsc",
-    "build": "npm run clean && npm run tsc",
-    "test": "mocha --config ./.mocharc.json"
+    "build": "npm run clean && npm run tsc"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.2.6",
