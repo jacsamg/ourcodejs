@@ -20,7 +20,7 @@
     "url": "https://github.com/jacsamg/ourcodejs.git"
   },
   "scripts": {
-    "lint": "@biomejs/biome check",
+    "lint": "biome check",
     "clean": "our-delete ./dist ./cache/.tsbuildinfo --force",
     "tsc": "tsc",
     "build": "npm run clean && npm run tsc",
