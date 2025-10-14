@@ -31,6 +31,7 @@ const router = createRouter(
 
 const server = http.createServer((req, res) => {
   const route = router.getRoute(req.method, req.url);
+  
   if (route) {
     route.handler(req, res, route.params);
   } else {
