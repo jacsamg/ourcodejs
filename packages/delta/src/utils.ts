@@ -1,14 +1,14 @@
-import { DeltaPathPiece } from './types.js';
+import { DeltaSegmentInfo } from './types.js';
 
-export function pieceIsParam(piece: string): boolean {
-  return piece.startsWith(':');
+function segmentIsParam(segment: string): boolean {
+  return segment.startsWith(':');
 }
 
-export function getDeltaPathPieces(path: string): DeltaPathPiece[] {
-  const pieces = path.split('/').filter(Boolean);
+export function getSegments(path: string): DeltaSegmentInfo[] {
+  const segments = path.split('/').filter(Boolean);
 
-  return pieces.map((piece) => ({
-    value: piece,
-    isParam: pieceIsParam(piece)
-  }));
+  return segments.map((segment) => {
+    const isParam = segmentIsParam(segment);
+    return { value: isParam ? segment.slice(1) : segment, isParam };
+  });
 }

@@ -1,12 +1,12 @@
-import { DeltaRoute, DeltaRouteSetup, HandlerFn, DeltaPathPiece, DeltaHttpMethod } from './types.js';
-import { getDeltaPathPieces } from './utils.js';
+import { DeltaRoute, DeltaRouteSetup, HandlerFn, DeltaSegmentInfo, DeltaHttpMethod } from './types.js';
+import { getSegments } from './utils.js';
 
-const PARAM_PIECE_KEY = '*';
+const SEGMENT_PARAM_KEY = '*';
 
 class DeltaNode {
   public readonly children: Map<string, DeltaNode> = new Map();
 
-  public piece: string | null = null;
+  public segment: DeltaSegmentInfo | null = null;
   public method: DeltaHttpMethod | null = null;
   public handler: HandlerFn | null = null;
 }
@@ -17,19 +17,19 @@ export class DeltaRouter {
 
   constructor(items: DeltaRouteSetup[]) {
     for (const item of items) {
-      const pieces: DeltaPathPiece[] = getDeltaPathPieces(item.path);
+      const segments: DeltaSegmentInfo[] = getSegments(item.path);
       const resolver = item.resolver;
       let currentNode = this.root;
 
-      for (const piece of pieces) {
-        const pieceKey = piece.isParam ? PARAM_PIECE_KEY : piece.value;
+      for (const segment of segments) {
+        const segmentKey = segment.isParam ? SEGMENT_PARAM_KEY : segment.value;
 
-        if (!currentNode.children.has(pieceKey)) {
-          currentNode.children.set(pieceKey, new DeltaNode());
+        if (!currentNode.children.has(segmentKey)) {
+          currentNode.children.set(segmentKey, new DeltaNode());
         }
 
-        currentNode.piece = piece.isParam ? piece.value.slice(1) : piece.value;
-        currentNode = currentNode.children.get(pieceKey)!;
+        currentNode.segment = segment;
+        currentNode = currentNode.children.get(segmentKey)!;
       }
 
       if (resolver instanceof DeltaRouter) {
@@ -53,26 +53,27 @@ export class DeltaRouter {
   }
 
   public getRoute(method: string = '', path: string = ''): DeltaRoute | null {
-    const pieces: string[] = path.split('/').filter(Boolean);
+    const segments: string[] = path.split('/').filter(Boolean);
     const params = new Map<string, string>();
     let currentNode = this.root;
 
-    for (const piece of pieces) {
-      if (currentNode.children.has(piece)) {
-        currentNode = currentNode.children.get(piece)!;
+    for (const segment of segments) {
+      if (currentNode.children.has(segment)) {
+        currentNode = currentNode.children.get(segment)!;
         continue;
       }
 
-      if (currentNode.children.has(PARAM_PIECE_KEY)) {
-        currentNode = currentNode.children.get(PARAM_PIECE_KEY)!;
-        params.set(currentNode.piece!, piece);
+      const paramNode = currentNode.children.get(SEGMENT_PARAM_KEY);
+      if (paramNode) {
+        currentNode = paramNode;
+        params.set(currentNode.segment!.value, segment);
         continue;
       }
 
       return null;
     }
 
-    if ((method !== currentNode.method) || (!currentNode.handler)) {
+    if ((method !== currentNode.method) || !currentNode.handler) {
       return null;
     }
 

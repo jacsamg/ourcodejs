@@ -4,7 +4,7 @@ export type DeltaHttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEA
 
 export type HandlerFn = (...args: any[]) => (void | Promise<void>);
 
-export interface DeltaPathPiece {
+export interface DeltaSegmentInfo {
   value: string;
   isParam: boolean;
 }
