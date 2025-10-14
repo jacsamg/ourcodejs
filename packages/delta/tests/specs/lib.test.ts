@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import { createRouter } from '../../src/lib';
+import {ERROR_MSG} from '../../src/data';
 import { BASIC_ROUTE, PARAM_ROUTE } from '../utils/data';
 
 describe('lib', () => {
@@ -24,6 +25,11 @@ describe('lib', () => {
       expect(router.getRoute('GET', '/a/this-is-a-param/c')).to.not.be.null;
     });
 
+    // it('Should add route with query param and return route', () => {
+    //   const router = createRouter(BASIC_ROUTE);
+    //   expect(router.getRoute('GET', '/a/b/c?foo=bar')).to.not.be.null;
+    // });
+
     it('Should work with nested routes', () => {
       const router01 = createRouter({ method: 'GET', path: '/c', resolver: () => { } });
       const router02 = createRouter({ method: 'GET', path: '/b', resolver: router01 });
@@ -39,7 +45,7 @@ describe('lib', () => {
         { method: 'GET', path: '/a', resolver: router01 }
       );
 
-      expect(router02).to.throw('Router already exists for this route!');
+      expect(router02).to.throw(ERROR_MSG.ROUTER_EXISTS);
     });
 
     it('Should throw an error when assigning a handler to an existing route twice', () => {
@@ -49,7 +55,7 @@ describe('lib', () => {
         { method: 'GET', path: '/a', resolver: handler }
       );
 
-      expect(_createRouter).to.throw('Handler already exists for this route!');
+      expect(_createRouter).to.throw(ERROR_MSG.HANDLER_EXISTS);
     });
   });
 });

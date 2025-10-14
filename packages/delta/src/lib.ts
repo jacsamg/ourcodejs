@@ -1,3 +1,4 @@
+import { ERROR_MSG, SEGMENT_PARAM_KEY } from './data.js';
 import type {
   DeltaHttpMethod,
   DeltaRoute,
@@ -6,8 +7,6 @@ import type {
   HandlerFn,
 } from './types.js';
 import { getSegments } from './utils.js';
-
-const SEGMENT_PARAM_KEY = '*';
 
 class DeltaNode {
   public readonly children: Map<string, DeltaNode> = new Map();
@@ -47,7 +46,7 @@ export class DeltaRouter {
       // For nested DeltaRouter, add its root's children to the current node's children
       for (const [segmentKey, childNode] of resolver.children.entries()) {
         if (currentNode.children.has(segmentKey)) {
-          throw new Error('Node already exists for this segment!');
+          throw new Error(ERROR_MSG.ROUTER_EXISTS);
         }
 
         currentNode.children.set(segmentKey, childNode);
@@ -55,7 +54,7 @@ export class DeltaRouter {
     }
 
     if (currentNode.handler !== null) {
-      throw new Error('Handler already exists for this node!');
+      throw new Error(ERROR_MSG.HANDLER_EXISTS);
     }
 
     currentNode.method = route.method;
