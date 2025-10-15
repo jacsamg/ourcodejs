@@ -20,12 +20,12 @@ describe('lib', () => {
       expect(router.getRoute('GET', '/a/b/d')).to.be.null;
     });
 
-    it('Should add route with param and return route', () => {
+    it('Should resolve route with path parameter and return handler', () => {
       const router = createRouter(PARAM_ROUTE);
       expect(router.getRoute('GET', '/a/this-is-a-param/c')).to.not.be.null;
     });
 
-    it('Should add route with query param and return route', () => {
+    it('Should ignore query string when matching and resolve route', () => {
       const router = createRouter(BASIC_ROUTE);
       expect(router.getRoute('GET', '/a/b/c?foo=bar')).to.not.be.null;
     });
@@ -56,6 +56,13 @@ describe('lib', () => {
       );
 
       expect(_createRouter).to.throw(ERROR_MSG.HANDLER_EXISTS);
+    });
+
+    it('Should throw INVALID_ROUTE when resolver is neither handler nor DeltaRouter', () => {
+      // Cast to any to bypass type checks intentionally for this negative test
+      const badSetup: any = { path: '/a', resolver: { /* invalid resolver */ } };
+      const create = () => createRouter(badSetup);
+      expect(create).to.throw(ERROR_MSG.INVALID_ROUTE);
     });
   });
 });
