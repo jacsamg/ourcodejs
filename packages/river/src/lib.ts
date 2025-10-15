@@ -10,7 +10,7 @@ import type {
   RiverMiddlewareDefinition,
   RiverMiddlewareFn,
 } from './types.js';
-import { defaultErrorHandler, getEndpointConfig, nextFn } from './utils.js';
+import { defaultErrorHandler, nextFn, safeEndResponse } from './utils.js';
 
 export function createMiddleware(
   middleware: RiverMiddlewareFn,
@@ -55,7 +55,7 @@ export function createEndpoint(options: RiverEndpointOptions): RiverEndpointFn {
   const middlewares = options.middlewares || [];
   const errorHandler =
     options.errorHandler || createErrorHandler(defaultErrorHandler);
-  const config = getEndpointConfig(options.config);
+  const errorLogger = options.errorLogger || console.error;
 
   return async (
     req: IncomingMessage,
@@ -77,11 +77,10 @@ export function createEndpoint(options: RiverEndpointOptions): RiverEndpointFn {
           ? error
           : new Error('Unknown error', { cause: error });
 
-      config.errorLogger(err);
+      errorLogger(err);
 
-      if (!event.res.writableEnded) {
-        await errorHandler.listen(event, err);
-      }
+      const connStatus = safeEndResponse(res);
+      if (connStatus === 'open') await errorHandler.listen(event, err);
     }
   };
 }

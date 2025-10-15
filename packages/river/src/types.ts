@@ -26,8 +26,7 @@ export type RiverEndpointFn = (
   req: IncomingMessage,
   res: ServerResponse,
   params: Map<string, string>,
-  // biome-ignore lint/suspicious/noExplicitAny: this is a generic store
-  store: Map<string, any>,
+  store: Map<string, string | number | boolean | object>,
 ) => RiverHandlerResponse;
 
 export interface RiverMiddlewareDefinition {
@@ -42,15 +41,9 @@ export interface RiverErrorHandlerDefinition {
   listen: RiverErrorHandlerFn;
 }
 
-export interface RiverEndpointConfig {
-  [key: PropertyKey]: string | number | boolean | object;
-  // biome-ignore lint/suspicious/noExplicitAny: this is a generic logger
-  errorLogger: (...args: any[]) => void;
-}
-
 export interface RiverEndpointOptions {
   handler: RiverHandlerDefinition;
   middlewares?: RiverMiddlewareDefinition[];
   errorHandler?: RiverErrorHandlerDefinition;
-  config?: Partial<RiverEndpointConfig>;
+  errorLogger?: (error: Error) => void;
 }
