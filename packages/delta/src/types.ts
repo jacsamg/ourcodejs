@@ -25,8 +25,12 @@ export interface DeltaRoute {
   handler: HandlerFn;
 }
 
-export interface DeltaRouteSetup {
+export type DeltaNestedRouter = { path: string; resolver: DeltaRouter };
+
+export type DeltaRouteHandler = {
   path: string;
   method: DeltaHttpMethod;
-  resolver: HandlerFn | DeltaRouter;
-}
+  resolver: HandlerFn;
+};
+
+export type DeltaRouteSetup = DeltaRouteHandler | DeltaNestedRouter;
