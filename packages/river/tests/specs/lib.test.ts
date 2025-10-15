@@ -25,20 +25,20 @@ describe('lib', () => {
 
     it('Should run sync/async middleware/handler in order', async () => {
       const store = new Map();
-      const middleware01 = createMiddleware(async (e: RiverEvent, next: () => boolean) => {
+      const middleware01 = createMiddleware(async (e: RiverEvent) => {
         e.store.set('test', [1]);
-        return next();
+        return true;
       });
-      const middleware02 = createMiddleware(async (e: RiverEvent, next: () => boolean) => {
+      const middleware02 = createMiddleware(async (e: RiverEvent) => {
         const test = <[] | undefined>e.store.get('test');
         if (test) e.store.set('test', [...test, 2]);
         await timeout();
-        return next();
+        return true;
       });
-      const middleware03 = createMiddleware((e: RiverEvent, next: () => boolean) => {
+      const middleware03 = createMiddleware((e: RiverEvent) => {
         const test = <[] | undefined>e.store.get('test');
         if (test) e.store.set('test', [...test, 3]);
-        return next();
+        return true;
       });
       const handler = createHandler(async (e: RiverEvent) => {
         const test = <[] | undefined>e.store.get('test');
@@ -61,10 +61,8 @@ describe('lib', () => {
       let changeOnError = false;
       const endpoint = createEndpoint({
         handler,
-        config: {
-          errorLogger: () => {
-            changeOnError = true;
-          }
+        errorLogger: () => {
+          changeOnError = true;
         }
       });
 
@@ -81,7 +79,7 @@ describe('lib', () => {
       });
       const endpoint = createEndpoint({
         handler,
-        config: { errorLogger: () => void 0 }
+        errorLogger: () => void 0
       });
 
       await endpoint(createMockReq(), response, params, new Map());
@@ -101,7 +99,7 @@ describe('lib', () => {
       });
       const endpoint = createEndpoint({
         handler, errorHandler,
-        config: { errorLogger: () => void 0 }
+        errorLogger: () => void 0
       });
 
       await endpoint(createMockReq(), createMockRes(), params, store);
@@ -122,7 +120,7 @@ describe('lib', () => {
       });
       const endpoint = createEndpoint({
         handler,
-        config: { errorLogger: () => void 0 }
+        errorLogger: () => void 0
       });
 
       await endpoint(req, res, params, new Map());
@@ -152,7 +150,7 @@ describe('lib', () => {
       const endpoint = createEndpoint({
         handler,
         errorHandler,
-        config: { errorLogger: () => void 0 }
+        errorLogger: () => void 0
       });
 
       await endpoint(req, res, params, new Map());

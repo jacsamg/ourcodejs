@@ -10,13 +10,15 @@ import type {
   RiverMiddlewareDefinition,
   RiverMiddlewareFn,
 } from './types.js';
-import { defaultErrorHandler, nextFn, safeEndResponse } from './utils.js';
+import { defaultErrorHandler, safeEndResponse } from './utils.js';
+
+const defErrorHandler = createErrorHandler(defaultErrorHandler);
 
 export function createMiddleware(
   middleware: RiverMiddlewareFn,
 ): RiverMiddlewareDefinition {
   return {
-    listen: (event: RiverEvent) => middleware(event, nextFn),
+    listen: (event: RiverEvent) => middleware(event),
   };
 }
 
@@ -38,23 +40,19 @@ async function runEndpointMiddlewares(
   event: RiverEvent,
   middlewares: RiverMiddlewareDefinition[],
 ): Promise<boolean> {
-  const middlewareLength = middlewares.length;
-  let next: boolean = true;
+  let runNext: boolean = true;
 
-  for (let i = 0; i < middlewareLength; i++) {
-    const middleware = middlewares[i];
-    next = (await middleware.listen(event)) || false;
-
-    if (!next) break;
+  for (const middleware of middlewares) {
+    runNext = (await middleware.listen(event)) ?? false;
+    if (!runNext) break;
   }
 
-  return next;
+  return runNext;
 }
 
 export function createEndpoint(options: RiverEndpointOptions): RiverEndpointFn {
   const middlewares = options.middlewares || [];
-  const errorHandler =
-    options.errorHandler || createErrorHandler(defaultErrorHandler);
+  const errorHandler = options.errorHandler || defErrorHandler;
   const errorLogger = options.errorLogger || console.error;
 
   return async (
@@ -66,9 +64,7 @@ export function createEndpoint(options: RiverEndpointOptions): RiverEndpointFn {
     const event: RiverEvent = { req, res, params, store };
 
     try {
-      const next = await runEndpointMiddlewares(event, middlewares);
-
-      if (next) {
+      if (await runEndpointMiddlewares(event, middlewares)) {
         await options.handler.listen(event);
       }
     } catch (error: unknown) {

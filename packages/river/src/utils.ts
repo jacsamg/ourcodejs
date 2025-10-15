@@ -23,7 +23,3 @@ export function defaultErrorHandler({ res }: RiverEvent): void {
   res.setHeader('Content-Type', 'text/plain');
   res.end('Internal server error');
 }
-
-export function nextFn(): boolean {
-  return true;
-}

@@ -12,11 +12,7 @@ export type RiverMiddlewareResponse =
   | boolean
   | undefined;
 export type RiverHandlerResponse = Promise<void> | void;
-export type MiddlewareNextFn = () => boolean;
-export type RiverMiddlewareFn = (
-  event: RiverEvent,
-  next: MiddlewareNextFn,
-) => RiverMiddlewareResponse;
+export type RiverMiddlewareFn = (event: RiverEvent) => RiverMiddlewareResponse;
 export type RiverHandlerFn = (event: RiverEvent) => RiverHandlerResponse;
 export type RiverErrorHandlerFn = (
   event: RiverEvent,
