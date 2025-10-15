@@ -15,7 +15,7 @@ export type DeltaHttpMethod =
 // biome-ignore lint/suspicious/noExplicitAny: this is a generic handler type
 export type HandlerFn = (...args: any[]) => void | Promise<void>;
 
-export interface DeltaSegmentInfo {
+export interface DeltaSegment {
   value: string;
   isParam: boolean;
 }
