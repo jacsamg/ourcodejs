@@ -10,9 +10,9 @@ River allows you to create endpoints with handlers and middlewares for your Node
 
 Here's how to use River with a vanilla Node.js server:
 
-```javascript
-const http = require('http');
-const { createHandler, createEndpoint } = require('@ourcodejs/river');
+```js
+import http from 'node:http';
+import { createHandler, createEndpoint } from '@ourcodejs/river';
 
 const handler = createHandler((event) => {
   event.res.writeHead(200, { 'Content-Type': 'text/plain' });
@@ -36,8 +36,8 @@ Run the server and visit `http://localhost:3000` to see "Hello World".
 
 You can add middlewares to your endpoint:
 
-```javascript
-const { createMiddleware } = require('@ourcodejs/river');
+```js
+import { createMiddleware } from '@ourcodejs/river';
 
 // Middleware to log requests
 const loggerMiddleware = createMiddleware((event, next) => {
