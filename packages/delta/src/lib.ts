@@ -9,14 +9,15 @@ import type {
 } from './types.js';
 import { getSegments } from './utils.js';
 
-export class DeltaNode {}
-
-export class DeltaRouter {
-  public readonly children: Map<string, DeltaRouter> = new Map();
-
+export class DeltaNode {
   public segment: DeltaSegmentInfo | null = null;
   public method: DeltaHttpMethod | null = null;
   public handler: HandlerFn | null = null;
+}
+
+export class DeltaRouter {
+  public readonly node: DeltaNode = new DeltaNode();
+  public readonly children: Map<string, DeltaRouter> = new Map();
 
   constructor(routes: DeltaRouteSetup[]) {
     for (const route of routes) {
@@ -27,70 +28,77 @@ export class DeltaRouter {
   private createTree(route: DeltaRouteSetup): void {
     const segments: DeltaSegmentInfo[] = getSegments(route.path);
     const resolver = route.resolver;
-    let currentNode: DeltaRouter = this; // Start from the root node
+    let currentRouter: DeltaRouter = this; // Start from the root node
 
     for (const segment of segments) {
       const segmentKey = segment.isParam ? SEGMENT_PARAM_KEY : segment.value;
-      let child = currentNode.children.get(segmentKey);
+      let child = currentRouter.children.get(segmentKey);
 
       if (!child) {
         child = new DeltaRouter([]);
-        currentNode.children.set(segmentKey, child);
+        currentRouter.children.set(segmentKey, child);
       }
 
-      // Assign the segment to the child node (not the parent)
-      child.segment = segment;
-      currentNode = child; // Move to the child node
+      child.node.segment = segment; // Assign the segment to the child node (not the parent)
+      currentRouter = child; // Move to the child node
     }
 
     if (resolver instanceof DeltaRouter) {
       // For nested DeltaRouter, add its children to the current node's children
       for (const [segmentKey, childNode] of resolver.children.entries()) {
-        if (currentNode.children.has(segmentKey)) {
+        if (currentRouter.children.has(segmentKey)) {
           throw new Error(ERROR_MSG.ROUTER_EXISTS);
         }
 
-        currentNode.children.set(segmentKey, childNode);
+        currentRouter.children.set(segmentKey, childNode);
       }
 
-      return;
+      return; // Because the assignment of handler/method is done in its own tree
     }
 
-    if (currentNode.handler !== null) {
+    if (currentRouter.node.handler !== null) {
       throw new Error(ERROR_MSG.HANDLER_EXISTS);
     }
 
-    currentNode.method = (route as DeltaRouteHandler).method;
-    currentNode.handler = <HandlerFn>resolver;
+    currentRouter.node.method = (route as DeltaRouteHandler).method;
+    currentRouter.node.handler = <HandlerFn>resolver;
   }
 
   public getRoute(method: string = '', path: string = ''): DeltaRoute | null {
     const segmentKeys: string[] = path.split('?')[0].split('/').filter(Boolean);
     const params = new Map<string, string>();
-    let currentNode: DeltaRouter = this;
+    let currentRouter: DeltaRouter = this;
 
     for (const segmentKey of segmentKeys) {
-      const directNode = currentNode.children.get(segmentKey);
+      const directNode = currentRouter.children.get(segmentKey);
       if (directNode) {
-        currentNode = directNode;
+        currentRouter = directNode;
         continue;
       }
 
-      const paramNode = currentNode.children.get(SEGMENT_PARAM_KEY);
+      const paramNode = currentRouter.children.get(SEGMENT_PARAM_KEY);
       if (paramNode) {
-        currentNode = paramNode;
-        params.set((currentNode.segment as DeltaSegmentInfo).value, segmentKey);
+        currentRouter = paramNode;
+        params.set(
+          (currentRouter.node.segment as DeltaSegmentInfo).value,
+          segmentKey,
+        );
         continue;
       }
 
       return null;
     }
 
-    if (method !== currentNode.method || !currentNode.handler) {
+    if (!currentRouter.node.handler) {
       return null;
     }
 
-    return { params, handler: currentNode.handler };
+    const nodeMethod = currentRouter.node.method;
+    if (nodeMethod !== 'ALL' && method !== nodeMethod) {
+      return null;
+    }
+
+    return { params, handler: currentRouter.node.handler };
   }
 }
 
