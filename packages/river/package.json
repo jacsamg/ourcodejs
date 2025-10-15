@@ -1,6 +1,6 @@
 {
   "name": "@ourcodejs/river",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "license": "MIT",
   "author": "Jacob Samuel G.",
   "homepage": "https://github.com/jacsamg/ourcodejs",
@@ -27,9 +27,6 @@
     "tsc": "tsc",
     "build": "npm run clean && npm run tsc",
     "release": "npm run build && npm publish"
-  },
-  "dependencies": {
-    "@ourcodejs/reef": "*"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.2.6",
