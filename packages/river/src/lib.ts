@@ -78,7 +78,10 @@ export function createEndpoint(options: RiverEndpointOptions): RiverEndpointFn {
           : new Error('Unknown error', { cause: error });
 
       config.errorLogger(err);
-      errorHandler.listen(event, err);
+
+      if (!event.res.writableEnded) {
+        await errorHandler.listen(event, err);
+      }
     }
   };
 }

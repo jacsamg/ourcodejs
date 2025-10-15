@@ -107,5 +107,56 @@ describe('lib', () => {
       await endpoint(createMockReq(), createMockRes(), params, store);
       expect(store.get('error')).to.be.true;
     });
+
+    it('Should not write headers/body if headers already sent', async () => {
+      const req = createMockReq();
+      const res = createMockRes();
+      // Simulate headers already sent by writing head and some data
+      res.writeHead(200, { 'Content-Type': 'text/plain' });
+      res.write('partial');
+
+      const setHeaderSpy = sinon.spy(res, 'setHeader');
+
+      const handler = createHandler((e: RiverEvent) => {
+        throw new Error('Test error after headers');
+      });
+      const endpoint = createEndpoint({
+        handler,
+        config: { errorLogger: () => void 0 }
+      });
+
+      await endpoint(req, res, params, new Map());
+
+      // headers were already sent, defaultErrorHandler should not set headers
+      sinon.assert.notCalled(setHeaderSpy);
+      // response should end gracefully
+      expect(res.writableEnded).to.be.true;
+    });
+
+    it('Should not call error handler if response already ended', async () => {
+      const req = createMockReq();
+      const res = createMockRes();
+      // end response before the error occurs
+      res.writeHead(200, { 'Content-Type': 'text/plain' });
+      res.end('done');
+
+      const spy = sinon.spy();
+
+      const handler = createHandler((e: RiverEvent) => {
+        throw new Error('Late error');
+      });
+      const errorHandler = createErrorHandler((_e: RiverEvent, _err: Error) => {
+        spy();
+      });
+
+      const endpoint = createEndpoint({
+        handler,
+        errorHandler,
+        config: { errorLogger: () => void 0 }
+      });
+
+      await endpoint(req, res, params, new Map());
+      sinon.assert.notCalled(spy);
+    });
   });
 });
